@@ -18,37 +18,39 @@ public class App
     	 App app= new App();
     	 String lineRead="x";
     	 Scanner console = new Scanner(System.in);
-    	 ArrayList<Double> lines = new ArrayList<Double>();    	
+    	 ArrayList<vatCalculator> lines = new ArrayList<vatCalculator>();    	
     	 System.out.println( "Enter the VAT percentage  :" );
          float vat =console.nextFloat();
+
         try
         {
             while(prompt() &&(lineRead = console.next()) != null) 
             {
+
                 if (lineRead.toString().equalsIgnoreCase("QUIT"))
                 	break;
-
-            	lines.add(app.VAT(Float.parseFloat(lineRead),vat));
+            	System.out.println( "Enter the Quantity  :" );
+                int quantity =console.nextInt();
+                vatCalculator tb= new vatCalculator(vat,Double.parseDouble(lineRead),quantity);
+            	lines.add(tb);
             }
             
         }catch( NoSuchElementException e )
         {}
         
-        Collections.sort(lines);
-        Collections.reverse(lines);
-        for (double line : lines) {
-        System.out.println(line);
-        }
+        lines.forEach(tb-> {
+        System.out.println(tb.getTotalPrice());
+        });
         
         
     }
 
     
-   double VAT (float cost, float vat) {
-
-//     //return ((((vat)/100)*cost) + cost);
-    return ((vat*cost)/100 + cost)	;	
-    }
+//   double VAT (float cost, float vat) {
+//
+////     //return ((((vat)/100)*cost) + cost);
+//    return ((vat*cost)/100 + cost)	;	
+//    }
    static private boolean prompt()
    {
        System.out.print("enter a message :");
